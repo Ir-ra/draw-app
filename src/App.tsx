@@ -10,7 +10,6 @@ function App() {
   return (
     <div>
       {loading && !error && <Loader />}
-
       <GameField />
     </div>
   )

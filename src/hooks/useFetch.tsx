@@ -1,7 +1,13 @@
 import { useEffect, useState } from "react";
 
+type DataType = {
+  id: string;
+  field: number;
+  name: string;
+};
+
 export const useFetch = (url: string) => {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState<DataType[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
