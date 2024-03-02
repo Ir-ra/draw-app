@@ -1,44 +1,25 @@
-import { useState } from "react";
-import { useFetch } from "../../hooks/useFetch";
-import {  GameRow } from "../GameRow/GameRow";
+import { useEffect, useState } from "react";
+import { GameRow } from "../GameRow/GameRow";
 
-export default function GameField() {
-  const BASE_URL = 'https://60816d9073292b0017cdd833.mockapi.io/modes';
-  const { data } = useFetch(BASE_URL);
+type GameFieldProps = {
+  size: number;
+  refresh: boolean;
+  onCellPaint: (rowIndex: number, cellIndex: number) => void;
+}
+export default function GameField({size, refresh, onCellPaint } : GameFieldProps) {
+  const [gameBoard, setGameBoard] = useState<boolean[][]>([]);
 
-  const [gameBoard, setGameBoard] = useState<number[][]>([]);
-  const [optionValue, setOptionValue] = useState(5);
-  const [size, setSize] = useState(5);
-
-
-  const generateGameField = () => {
-    setSize(optionValue)
-    const newGameBoard = new Array(size).fill(new Array(size).fill(size));
-     setGameBoard(newGameBoard);
-  }
-
-  const handleOptionClick = (val: number) => {
-    setOptionValue(val);
-  };
+  useEffect(() => {
+    const newGameBoard = new Array(size).fill(new Array(size).fill(false));
+    setGameBoard(newGameBoard);
+  }, [size]);
 
   return (
-    <div className="gameField" style={{display: 'flex'}}>
-
-      <div>
-        <select name="" id="" value={optionValue} onChange={(e) => handleOptionClick(parseInt(e.target.value))}>
-          {data.map(option => (
-            <option key={option.field} value={option.field}>
-              {option.name}
-            </option>
-          ))}
-        </select>
-        <button onClick={generateGameField}>Start</button>
-      </div>
-
+    <div className="gameField">
       <table className="board">
         <tbody>
           {gameBoard.map((row, rowIndex) => (
-            <GameRow row={row} rowIndex={rowIndex} key={rowIndex} size={size} />
+            <GameRow row={row} rowIndex={rowIndex} key={rowIndex}  refresh={refresh} onCellPaint={onCellPaint}/>
           ))}
         </tbody>
       </table>
