@@ -20,10 +20,11 @@ export const GameCell: React.FC<GameCellProps> = ({ cellIndex, rowIndex, initVal
     setPaintedCells(false);
   }, [refresh]);
 
+
   return (
     <td
       key={`${cellIndex}_${rowIndex}`}
-      className={`cell ${paintedCells ? 'painted' : ''}`}
+      className={`gameField__cell ${paintedCells ? 'gameField__cell--painted' : ''}`}
       onMouseEnter={() => handleMouseEnter()}
     ></td>
   )

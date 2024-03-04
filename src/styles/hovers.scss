@@ -1,0 +1,40 @@
+.hovers {
+  &__title {
+    text-transform: uppercase;
+    font-size: 18px;
+    font-weight: 500;
+    color: #000;
+    border-bottom: 1px solid rgb(0, 0, 0);
+    padding: 15px 0;
+  }
+
+  &__containers {
+    width: 200px;
+    height: auto;
+
+    color: #000;
+    max-height: 325px;
+    overflow-y: auto;
+    margin-top: 5px;
+
+    &--text {
+      background-color: rgb(238, 238, 185);
+      border-radius: 8px;
+      padding: 2px 5px;
+      margin: 4px;
+    }
+
+    &::-webkit-scrollbar {
+      width: 8px;
+
+      &-thumb {
+        background-color: #606060;
+        border-radius: 6px;
+      }
+
+      &-track {
+        background-color: #ffffff;
+      }
+    }
+  }
+}

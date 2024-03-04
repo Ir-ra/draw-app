@@ -6,6 +6,7 @@ type GameFieldProps = {
   refresh: boolean;
   onCellPaint: (rowIndex: number, cellIndex: number) => void;
 }
+
 export default function GameField({size, refresh, onCellPaint } : GameFieldProps) {
   const [gameBoard, setGameBoard] = useState<boolean[][]>([]);
 
@@ -16,10 +17,10 @@ export default function GameField({size, refresh, onCellPaint } : GameFieldProps
 
   return (
     <div className="gameField">
-      <table className="board">
+      <table className="gameField__board">
         <tbody>
           {gameBoard.map((row, rowIndex) => (
-            <GameRow row={row} rowIndex={rowIndex} key={rowIndex}  refresh={refresh} onCellPaint={onCellPaint}/>
+            <GameRow key={rowIndex} row={row} rowIndex={rowIndex} refresh={refresh} onCellPaint={onCellPaint}/>
           ))}
         </tbody>
       </table>

@@ -10,11 +10,10 @@ type GameRowProps = {
 
 export const GameRow: React.FC<GameRowProps> = ({ row, rowIndex, refresh, onCellPaint}) => {
   return (
-    <tr className="row">
+    <tr className="gameField__row">
       {row.map((cellValue, cellIndex) => (
-        <GameCell cellIndex={cellIndex} rowIndex={rowIndex} initValue={cellValue} refresh={refresh} onCellPaint={onCellPaint} />
+        <GameCell cellIndex={cellIndex} rowIndex={rowIndex} initValue={cellValue} refresh={refresh} onCellPaint={onCellPaint} key={`${rowIndex}_${cellIndex}`}/>
       ))}
     </tr>
   )
 }
-
