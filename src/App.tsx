@@ -1,25 +1,22 @@
-import { useEffect, useRef, useState } from 'react';
-import './App.css'
+import { useEffect, useState } from 'react';
 import GameField from './components/GameField/GameField';
-import { Loader } from './components/Loader/Loader';
-import { useFetch } from './hooks/useFetch';
+import Loader from './components/Loader/Loader';
 import Selector from './components/Selector/Selector';
 import StartButton from './components/StartButton/StartButton';
 import HoversContainer from './components/HoversContainer/HoversContainer';
+import './App.css';
+import { useFetch } from './hooks/useFetch';
+import { usePaintedCells } from './context/PaintedCellsContext';
+import { BASE_URL } from '../config';
+import { useRefresh } from './context/RefreshContext';
 
 function App() {
-  const BASE_URL = 'https://60816d9073292b0017cdd833.mockapi.io/modes';
   const { loading, error } = useFetch(BASE_URL);
   const [optionValue, setOptionValue] = useState<number | null>(null);
   const [size, setSize] = useState(0);
-  const [refresh, setRefresh] = useState(false);
-  const hoversRef = useRef<HTMLDivElement>(null);;
-  const [paintedCells, setPaintedCells] = useState<{ rowIndex: number; cellIndex: number; }[]>([]);
 
-  const handleCellPaint = (rowIndex: number, cellIndex: number) => {
-    const newPaintedCells = [...paintedCells, { rowIndex, cellIndex }];
-    setPaintedCells(newPaintedCells);
-  };
+  const { setPaintedCells } = usePaintedCells();
+  const { refresh, setRefresh } = useRefresh();
 
   const handleClick = () => {
     if (optionValue !== null) {
@@ -27,12 +24,6 @@ function App() {
       setRefresh(!refresh);
     }
   };
-
-  useEffect(() => {
-    if (hoversRef.current) {
-      hoversRef.current.scrollTop = hoversRef.current.scrollHeight;
-    }
-  }, [paintedCells]);
 
   useEffect(() => {
     setPaintedCells([]);
@@ -50,10 +41,10 @@ function App() {
               <StartButton onClickHandle={handleClick} />
             </div>
 
-            <GameField size={size} refresh={refresh} onCellPaint={handleCellPaint} />
+            <GameField size={size} />
           </div>
 
-          <HoversContainer paintedCells={paintedCells} hoversRef={hoversRef}/>
+          <HoversContainer />
         </>
       )}
     </main>

@@ -1,13 +1,11 @@
 import { useEffect, useState } from "react";
-import { GameRow } from "../GameRow/GameRow";
+import GameRow from "../GameRow/GameRow";
 
 type GameFieldProps = {
   size: number;
-  refresh: boolean;
-  onCellPaint: (rowIndex: number, cellIndex: number) => void;
-}
+};
 
-export default function GameField({size, refresh, onCellPaint } : GameFieldProps) {
+export default function GameField({ size }: GameFieldProps) {
   const [gameBoard, setGameBoard] = useState<boolean[][]>([]);
 
   useEffect(() => {
@@ -20,10 +18,10 @@ export default function GameField({size, refresh, onCellPaint } : GameFieldProps
       <table className="gameField__board">
         <tbody>
           {gameBoard.map((row, rowIndex) => (
-            <GameRow key={rowIndex} row={row} rowIndex={rowIndex} refresh={refresh} onCellPaint={onCellPaint}/>
+            <GameRow key={rowIndex} row={row} rowIndex={rowIndex} />
           ))}
         </tbody>
       </table>
     </div>
-  )
-}
+  );
+};

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useFetch } from "../../hooks/useFetch";
+import { BASE_URL } from '../../../config';
 import up from '../../assets/selector_up.svg';
 import down from '../../assets/selector_down.svg';
 
@@ -9,7 +10,6 @@ type TypeSelector = {
 };
 
 export default function Selector({ setOptionValue, optionValue }: TypeSelector) {
-  const BASE_URL = 'https://60816d9073292b0017cdd833.mockapi.io/modes';
   const { data } = useFetch(BASE_URL);
   const [isOpen, setIsOpen] = useState(false);
 
@@ -28,14 +28,14 @@ export default function Selector({ setOptionValue, optionValue }: TypeSelector) 
     <div className="selector">
       <div className="selector__title-container" onClick={toggling}>
         <p className="selector__title">
-        {selectedOptionName ? selectedOptionName : 'Pick mode'}
+          {selectedOptionName ? selectedOptionName : 'Pick mode'}
         </p>
         <span className="selector__title--arrow">
-        {isOpen ? (
-          <img src={up} alt="selector arrow" />
-        ):(
-          <img src={down} alt="selector arrow" />
-        )}
+          {isOpen ? (
+            <img src={up} alt="selector arrow up" />
+          ) : (
+            <img src={down} alt="selector arrow down" />
+          )}
         </span>
       </div>
 
@@ -53,5 +53,5 @@ export default function Selector({ setOptionValue, optionValue }: TypeSelector) 
         </div>
       )}
     </div>
-  )
-}
+  );
+};
