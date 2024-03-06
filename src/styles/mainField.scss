@@ -1,6 +1,11 @@
 .mainField {
   display: flex;
+  flex-direction: column;
   gap: 15px;
+
+  @media (min-width: 1024px) {
+    flex-direction: row;
+  }
 
   &__header {
     display: flex;

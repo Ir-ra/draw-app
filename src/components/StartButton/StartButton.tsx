@@ -1,10 +1,10 @@
 type ButtonType = {
-  onClickHandle: () => void;
+  onClick: () => void;
 };
 
-export default function StartButton({ onClickHandle }: ButtonType) {
+export default function StartButton({ onClick }: ButtonType) {
   return (
-    <button onClick={onClickHandle} className='startButton'>
+    <button onClick={onClick} className='startButton'>
       Start
     </button>
   )

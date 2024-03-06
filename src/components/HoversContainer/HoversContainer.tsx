@@ -14,12 +14,14 @@ export default function HoversContainer() {
 
   return (
     <div className='hovers'>
-      <h1 className='hovers__title'>Hover squears</h1>
+      <h1 className='hovers__title'>HOVER SQUARES</h1>
 
       <div ref={hoversRef} className='hovers__containers'>
         {paintedCells.map((cell, index) => (
           <Fragment key={`${cell.cellIndex}_${index}`} >
-            <p className='hovers__containers--text'>row: {cell.rowIndex + 1} cell: {cell.cellIndex + 1}</p>
+            <p className='hovers__containers--text'>
+              row: {cell.rowIndex + 1} cell: {cell.cellIndex + 1}
+            </p>
           </Fragment>
         ))}
       </div>

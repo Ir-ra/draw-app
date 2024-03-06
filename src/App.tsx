@@ -8,20 +8,18 @@ import './App.css';
 import { useFetch } from './hooks/useFetch';
 import { usePaintedCells } from './context/PaintedCellsContext';
 import { BASE_URL } from '../config';
-import { useRefresh } from './context/RefreshContext';
 
 function App() {
   const { loading, error } = useFetch(BASE_URL);
   const [optionValue, setOptionValue] = useState<number | null>(null);
   const [size, setSize] = useState(0);
-
+  const [refresh, setRefresh] = useState(new Date());
   const { setPaintedCells } = usePaintedCells();
-  const { refresh, setRefresh } = useRefresh();
 
   const handleClick = () => {
     if (optionValue !== null) {
       setSize(optionValue);
-      setRefresh(!refresh);
+      setRefresh(new Date());
     }
   };
 
@@ -31,17 +29,27 @@ function App() {
 
   return (
     <main className='mainField'>
+      {error && (
+        <h2 className="noResults">
+          Sorry, unable to load data, please try again later.
+        </h2>
+      )}
       {loading && !error && <Loader />}
-
       {!loading && !error && (
         <>
           <div>
             <div className='mainField__header'>
-              <Selector optionValue={optionValue} setOptionValue={setOptionValue} />
-              <StartButton onClickHandle={handleClick} />
+              <Selector
+                optionValue={optionValue}
+                setOptionValue={setOptionValue}
+              />
+              <StartButton onClick={handleClick} />
             </div>
 
-            <GameField size={size} />
+            <GameField
+              key={refresh.toString()}
+              size={size}
+            />
           </div>
 
           <HoversContainer />

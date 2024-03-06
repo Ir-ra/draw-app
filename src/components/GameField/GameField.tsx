@@ -18,7 +18,11 @@ export default function GameField({ size }: GameFieldProps) {
       <table className="gameField__board">
         <tbody>
           {gameBoard.map((row, rowIndex) => (
-            <GameRow key={rowIndex} row={row} rowIndex={rowIndex} />
+            <GameRow
+              key={rowIndex}
+              row={row}
+              rowIndex={rowIndex}
+            />
           ))}
         </tbody>
       </table>

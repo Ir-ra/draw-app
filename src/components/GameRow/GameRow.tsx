@@ -1,3 +1,4 @@
+import React from "react";
 import GameCell from "../GameCell/GameCell";
 
 type GameRowProps = {
@@ -5,7 +6,7 @@ type GameRowProps = {
   rowIndex: number;
 };
 
-export default function GameRow({ row, rowIndex }: GameRowProps) {
+function GameRow({ row, rowIndex }: GameRowProps) {
   return (
     <tr className="gameField__row">
       {row.map((cellValue, cellIndex) => (
@@ -19,3 +20,5 @@ export default function GameRow({ row, rowIndex }: GameRowProps) {
     </tr>
   );
 }
+
+export default React.memo(GameRow);
